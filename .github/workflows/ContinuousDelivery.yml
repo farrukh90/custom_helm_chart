@@ -2,9 +2,6 @@
 
 name: ContinuousDelivery
 
-env:
-    project_id: "csubrsnzorjkvdca"
-
 
 # Controls when the workflow will run
 on:
@@ -23,6 +20,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    env:
+      project_id: "csubrsnzorjkvdca"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
