@@ -31,3 +31,11 @@ jobs:
           git clone https://github.com/farrukh90/nodejs
 
 
+      # Runs a set of commands using the runners shell
+      - name: Switch Branches
+        working-directory: nodejs
+        run: |
+          git checkout 1.0.0
+          ls -l
+
+
