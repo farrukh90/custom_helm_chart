@@ -1,6 +1,8 @@
 env:
-  project_id: "csubrsnzorjkvdca"
-  repo: "https://github.com/farrukh90/nodejs"
+  project_id:   "csubrsnzorjkvdca"
+  app_name:     "nodejs"
+  version:      "1.0.0"
+  repo:         "https://github.com/farrukh90/nodejs"
 
 
 
@@ -38,25 +40,25 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Switch Branches
-        working-directory: nodejs
+        working-directory: ${{ env.app_name }}
         run: |
-          git checkout 1.0.0
+          git checkout ${{ env.app_version }}
           ls -l
 
 
 
       # Runs a set of commands using the runners shell
       - name: Build Image
-        working-directory: nodejs
+        working-directory: ${{ env.app_name }}
         run: |
-          docker build -t nodejs:1.0.0   . 
+          docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
 
 
       # Runs a set of commands using the runners shell
       - name: Tag Image
-        working-directory: nodejs
+        working-directory: ${{ env.app_name }}
         run: |
-          docker image tag nodejs:1.0.0 us-central1-docker.pkg.dev/${{ env.project_id }}/nodejs/nodejs:1.0.0     
+          docker image tag env.app_name:${{ env.app_version }} us-central1-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ 1.0.0 }}     
 
 
       # Runs a single command using the runners shell
@@ -81,7 +83,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Image push
-        working-directory: nodejs
+        working-directory: ${{ env.app_name }}
         run: |
-          docker push us-central1-docker.pkg.dev/${{ env.project_id }}/nodejs/nodejs:1.0.0     
+          docker push us-central1-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.app_version }}  
 
