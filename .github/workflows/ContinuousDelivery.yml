@@ -2,6 +2,11 @@
 
 name: ContinuousDelivery
 
+envs:
+  project_id: "csubrsnzorjkvdca"
+  repo: https://github.com/farrukh90/nodejs
+  image_tag: 1.0.0
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -28,14 +33,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Clone a repo
         run: |
-          git clone https://github.com/farrukh90/nodejs
+          git clone ${{ repo }}
 
 
       # Runs a set of commands using the runners shell
       - name: Switch Branches
         working-directory: nodejs
         run: |
-          git checkout 1.0.0
+          git checkout ${{1.0.0}}
           ls -l
 
 
@@ -44,14 +49,14 @@ jobs:
       - name: Build Image
         working-directory: nodejs
         run: |
-          docker build -t nodejs:1.0.0   . 
+          docker build -t nodejs:${{ image_tag }}   . 
 
 
       # Runs a set of commands using the runners shell
       - name: Tag Image
         working-directory: nodejs
         run: |
-          docker image tag nodejs:1.0.0 us-central1-docker.pkg.dev/csubrsnzorjkvdca/nodejs/nodejs:1.0.0     
+          docker image tag nodejs:${{ image_tag }} us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:${{ image_tag }}     
 
 
       # Runs a single command using the runners shell
@@ -63,7 +68,7 @@ jobs:
       - name: Authenticate to Google account
         run: |
           gcloud auth activate-service-account --key-file="service-account.json"
-          gcloud config set project csubrsnzorjkvdca
+          gcloud config set project ${{ project_id }}
 
 
 
@@ -78,5 +83,5 @@ jobs:
       - name: Image push
         working-directory: nodejs
         run: |
-          docker push us-central1-docker.pkg.dev/csubrsnzorjkvdca/nodejs/nodejs:1.0.0     
+          docker push us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:${{ image_tag }}     
 
