@@ -2,7 +2,7 @@
 
 name: ContinuousDelivery
 
-envs:
+env:
   project_id: "csubrsnzorjkvdca"
 
 
