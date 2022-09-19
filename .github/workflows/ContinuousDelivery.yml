@@ -4,8 +4,8 @@ name: ContinuousDelivery
 
 env:
   project_id: "csubrsnzorjkvdca"
-  repo: https://github.com/farrukh90/nodejs
-  image_tag: 1.0.0
+  repo: "https://github.com/farrukh90/nodejs"
+  image_tag: "1.0.0"
 
 # Controls when the workflow will run
 on:
