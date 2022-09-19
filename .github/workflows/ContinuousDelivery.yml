@@ -3,7 +3,7 @@
 name: ContinuousDelivery
 
 env:
-  project_id: "csubrsnzorjkvdca"
+    project_id: "csubrsnzorjkvdca"
 
 
 # Controls when the workflow will run
