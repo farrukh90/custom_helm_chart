@@ -1,10 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
 name: ContinuousDelivery
-env:
+
+envs:
   project_id: "csubrsnzorjkvdca"
-  repos: "https://github.com/farrukh90/nodejs"
-  image_tag: "1.0.0"
 
 
 # Controls when the workflow will run
@@ -33,14 +32,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Clone a repo
         run: |
-          git clone ${{ repo }}
+          git clone https://github.com/farrukh90/nodejs
 
 
       # Runs a set of commands using the runners shell
       - name: Switch Branches
         working-directory: nodejs
         run: |
-          git checkout ${{1.0.0}}
+          git checkout 1.0.0
           ls -l
 
 
@@ -49,14 +48,14 @@ jobs:
       - name: Build Image
         working-directory: nodejs
         run: |
-          docker build -t nodejs:${{ image_tag }}   . 
+          docker build -t nodejs:1.0.0   . 
 
 
       # Runs a set of commands using the runners shell
       - name: Tag Image
         working-directory: nodejs
         run: |
-          docker image tag nodejs:${{ image_tag }} us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:${{ image_tag }}     
+          docker image tag nodejs:1.0.0 us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:1.0.0     
 
 
       # Runs a single command using the runners shell
@@ -83,5 +82,5 @@ jobs:
       - name: Image push
         working-directory: nodejs
         run: |
-          docker push us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:${{ image_tag }}     
+          docker push us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:1.0.0     
 
