@@ -2,6 +2,8 @@
 
 name: ContinuousDelivery
 
+env:
+  project_id: "csubrsnzorjkvdca"
 
 # Controls when the workflow will run
 on:
@@ -54,7 +56,7 @@ jobs:
       - name: Tag Image
         working-directory: nodejs
         run: |
-          docker image tag nodejs:1.0.0 us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:1.0.0     
+          docker image tag nodejs:1.0.0 us-central1-docker.pkg.dev/${{ env.project_id }}/nodejs/nodejs:1.0.0     
 
 
       # Runs a single command using the runners shell
@@ -66,7 +68,7 @@ jobs:
       - name: Authenticate to Google account
         run: |
           gcloud auth activate-service-account --key-file="service-account.json"
-          gcloud config set project ${{ project_id }}
+          gcloud config set project ${{ env.project_id }}
 
 
 
@@ -81,5 +83,5 @@ jobs:
       - name: Image push
         working-directory: nodejs
         run: |
-          docker push us-central1-docker.pkg.dev/${{ project_id }}/nodejs/nodejs:1.0.0     
+          docker push us-central1-docker.pkg.dev/${{ env.project_id }}/nodejs/nodejs:1.0.0     
 
