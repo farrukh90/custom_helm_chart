@@ -39,3 +39,10 @@ jobs:
           ls -l
 
 
+
+      # Runs a set of commands using the runners shell
+      - name: Build Image
+        working-directory: nodejs
+        run: |
+          docker build -t nodejs:1.0.0   . 
+
