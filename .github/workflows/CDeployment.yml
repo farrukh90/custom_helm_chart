@@ -36,7 +36,7 @@ jobs:
       # Set GCP Project
       - name: Set GCP Project
         run: |
-          gcloud config set project ulonhjeeyzpdjsvz
+          gcloud config set project ${{ env.project_id }}
       # Get k8s credentials
       - name: Get k8s credentials
         run: |
