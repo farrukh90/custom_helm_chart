@@ -33,15 +33,22 @@ jobs:
       - name: Authenticate to GCP
         run: |
           gcloud auth activate-service-account --key-file="service-account.json"
+
+
       # Set GCP Project
       - name: Set GCP Project
         run: |
           gcloud config set project ${{ env.project_id }}
+
+
       # Get k8s credentials
       - name: Get k8s credentials
         run: |
           gcloud container clusters get-credentials project-cluster --region us-central1
           kubectl get nodes
+
+
+          
 ###############      Below commands are for deploying app
 
       # Runs a set of commands using the runners shell
