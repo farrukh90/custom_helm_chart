@@ -75,6 +75,7 @@ jobs:
       - name: Clone a repo
         run: |
           gcloud container clusters get-credentials project-cluster --region us-central1
+          ls -la 
           terraform apply     --auto-approve
 
 
