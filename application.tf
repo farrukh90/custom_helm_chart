@@ -8,7 +8,7 @@ output all {
 module "artemis" {
     source = "./modules/terraform-helm"
     deployment_name = "artemis"
-    deployment_namespace = module.grafana-terraform-k8s-namespace.namespace
+    deployment_namespace = module.artemis-namespace.namespace
     deployment_path = "charts/application"
     values_yaml = <<EOF
 
