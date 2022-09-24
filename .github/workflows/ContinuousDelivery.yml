@@ -1,7 +1,7 @@
 env:
   project_id:   "csubrsnzorjkvdca"
   app_name:     "nodejs"
-  app_version:  "3.0.0"
+  app_version:  "latest"
   repo:         "https://github.com/farrukh90/nodejs"
   repo_region:  "us-central1"
 

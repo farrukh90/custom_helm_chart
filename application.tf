@@ -16,7 +16,7 @@ replicaCount: 1
 
 image:
   repository: "us-central1-docker.pkg.dev/csubrsnzorjkvdca/artemis/artemis"
-  tag: "2.0.0"
+  tag: "latest"
 
 service:
   type: ClusterIP
