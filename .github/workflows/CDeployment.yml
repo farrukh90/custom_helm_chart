@@ -74,6 +74,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Clone a repo
         run: |
+          rm -rf ~/.kube/config
           gcloud container clusters get-credentials project-cluster --region us-central1
           ls -la 
           cat ~/.kube/config
