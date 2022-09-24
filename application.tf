@@ -2,7 +2,9 @@ module  "artemis-namespace" {
     source = "./modules/terraform-k8s-namespace"
     deployment_namespace = "artemis"
 }
-
+output all {
+  value = module.artemis
+}
 module "artemis" {
     source = "./modules/terraform-helm"
     deployment_name = "artemis"
