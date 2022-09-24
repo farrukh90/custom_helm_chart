@@ -1,7 +1,8 @@
 env:
   project_id:   "csubrsnzorjkvdca"
   app_name:     "nodejs"
-  app_version:  "latest"
+  app_version:  "2.0.0"
+  tag_app_version: "latest"
   repo:         "https://github.com/farrukh90/nodejs"
   repo_region:  "us-central1"
 
@@ -59,7 +60,7 @@ jobs:
       - name: Tag Image
         working-directory: ${{ env.app_name }}
         run: |
-          docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.app_version }}     
+          docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_app_version }}     
 
 
       # Runs a single command using the runners shell
@@ -86,5 +87,5 @@ jobs:
       - name: Image push
         working-directory: ${{ env.app_name }}
         run: |
-          docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.app_version }}  
+          docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_app_version }}  
 
