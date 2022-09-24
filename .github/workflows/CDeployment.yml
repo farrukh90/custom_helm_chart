@@ -30,15 +30,12 @@ jobs:
 
 ###############     Below commands a for GCP authentication
       # Authenticate to GCP
-      - name: Authenticate to GCP
-        run: |
-          gcloud auth activate-service-account --key-file="service-account.json"
 
-
-      # Set GCP Project
-      - name: Set GCP Project
-        run: |
-          gcloud config set project ${{ env.project_id }}
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
 
       # Get k8s credentials
