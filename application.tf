@@ -8,7 +8,7 @@ output all {
 module "artemis" {
     source = "./modules/terraform-helm"
     deployment_name = "artemis"
-    deployment_namespace = "artemis"
+    deployment_namespace = module.artemis-namespace.kubernetes_namespace.k8s-namespace
     deployment_path = "charts/application"
     values_yaml = <<EOF
 
