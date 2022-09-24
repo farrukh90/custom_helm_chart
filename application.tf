@@ -1,3 +1,9 @@
+provider "helm" {
+  kubernetes {
+    config_path = "~/.kube/config"
+  }
+}
+
 module  "artemis-namespace" {
     source = "./modules/terraform-k8s-namespace"
     deployment_namespace = "artemis"
