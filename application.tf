@@ -29,13 +29,13 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     acme.cert-manager.io/http01-edit-in-place: "true"
   hosts:
-    - host: "${var.app_name}.${ var.google_domain_name }"
+    - host: "${var.app_name}.${var.google_domain_name}"
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls: 
-    - secretName: ${var.app_name}
+    - secretName: "${var.app_name}"
       hosts:
-        - "${var.app_name}.${ var.google_domain_name }"
+        - "${var.app_name}.${var.google_domain_name}"
 EOF
 }
