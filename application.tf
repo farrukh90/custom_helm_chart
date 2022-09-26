@@ -1,11 +1,11 @@
 module  "application-namespace" {
     source = "./modules/terraform-k8s-namespace"
-    deployment_namespace = "${var.app_name}}"
+    deployment_namespace = var.app_name
 }
 
 module "application" {
     source = "./modules/terraform-helm"
-    deployment_name = "${var.app_name}}"
+    deployment_name = var.app_name
     deployment_namespace = module.application-namespace.namespace
     deployment_path = "charts/application"
     values_yaml = <<EOF
