@@ -12,3 +12,6 @@ variable google_domain_name {
 variable app_name {
   default = ""
 }
+variable "app_port" {
+  default = ""
+}
