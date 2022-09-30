@@ -28,7 +28,7 @@ module "service_accounts" {
   prefix        = ""
   generate_keys = true
   names = [
-    var.app_name
+    "${var.app_name}-${var.environment}"
   ]
   project_roles = [
     "${var.project_id}=>roles/owner",
