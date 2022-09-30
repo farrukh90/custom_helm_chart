@@ -38,7 +38,7 @@ image:
   repository: "${var.repository}"
   tag: "${var.app_version}"
 imagePullSecrets: 
-  - name: "${kubernetes_secret.artifact-registry.metadata.[0].name}"
+  - name: "${kubernetes_secret.artifact-registry.metadata.name}"
 
 service:
   type: ClusterIP
