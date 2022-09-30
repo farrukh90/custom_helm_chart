@@ -1,6 +1,10 @@
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+
 resource "kubernetes_secret" "artifact-registry" {
   metadata {
-    name = "artifact-registry"
+    name      = "artifact-registry"
     namespace = var.app_name
   }
 
@@ -11,18 +15,50 @@ resource "kubernetes_secret" "artifact-registry" {
       auths = {
         "${var.region}-docker.pkg.dev" = {
           "username" = var.registry_username
-          "password" = var.service_account
-          "email"    = "${var.service_account_name}@${var.project_id}.iam.gserviceaccount.com"
-          "auth"     = base64encode("${var.registry_username}:${var.service_account}")
+          "password" = module.service_accounts.key
+          "email"    = module.service_accounts.service_account.email
+          "auth"     = "${var.registry_username}:${module.service_accounts.key}"
         }
       }
     })
   }
 }
-variable "region" {}
-variable "app_name" {}
-variable "registry_username" {
-    default = "_json_key"
+
+
+module "service_accounts" {
+  source        = "terraform-google-modules/service-accounts/google"
+  version       = "~> 3.0"
+  project_id    = var.project_id
+  prefix        = ""
+  generate_keys = true
+  names = [
+    var.app_name
+  ]
+  project_roles = [
+    "${var.project_id}=>roles/owner",
+  ]
 }
-variable service_account {}
-variable project_id {}
+variable "region" {
+  default = "us-central1"
+}
+variable "registry_username" {
+  default = "_json_key"
+}
+
+
+variable "project_id" {
+  default = "csubrsnzorjkvdca"
+}
+
+
+variable "app_name" {
+  default = "nodejs"
+}
+
+output "key" {
+  value = module.service_accounts.key
+}
+
+output "email" {
+  value = module.service_accounts.service_account.email
+}
