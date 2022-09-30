@@ -15,7 +15,8 @@ replicaCount: 1
 image:
   repository: "${var.repository}"
   tag: "${var.app_version}"
-
+imagePullSecrets: 
+  - name: artifact-registry
 
 service:
   type: ClusterIP
