@@ -1,11 +1,11 @@
 module  "application-namespace" {
     source = "./modules/terraform-k8s-namespace"
-    deployment_namespace = var.app_name
+    deployment_namespace = "${var.app_name}-${var.environment}"
 }
 
 module "application" {
     source = "./modules/terraform-helm"
-    deployment_name = var.app_name
+    deployment_name = "${var.app_name}-${var.environment}"
     deployment_namespace = module.application-namespace.namespace
     deployment_path = "charts/application"
     values_yaml = <<EOF
@@ -31,13 +31,13 @@ ingress:
     acme.cert-manager.io/http01-edit-in-place: "true"
     timestamp: "{{ now | quote }}"
   hosts:
-    - host: "${var.app_name}.${var.google_domain_name}"
+    - host: "${var.app_name}-${var.environment}.${var.google_domain_name}"
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls: 
-    - secretName: "${var.app_name}"
+    - secretName: "${var.app_name}-${var.environment}"
       hosts:
-        - "${var.app_name}.${var.google_domain_name}"
+        - "${var.app_name}-${var.environment}.${var.google_domain_name}"
 EOF
 }
