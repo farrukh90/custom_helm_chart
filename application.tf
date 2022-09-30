@@ -1,3 +1,25 @@
+resource "kubernetes_secret" "artifact-registry" {
+  metadata {
+    name = "artifact-registry"
+    namespace = var.app_name
+  }
+
+  type = "kubernetes.io/dockerconfigjson"
+
+  data = {
+    ".dockerconfigjson" = jsonencode({
+      auths = {
+        "${var.region}-docker.pkg.dev" = {
+          "username" = var.registry_username
+          "password" = var.service_account
+          "email"    = "${var.service_account_name}@${var.project_id}.iam.gserviceaccount.com"
+          "auth"     = base64encode("${var.registry_username}:${var.service_account}")
+        }
+      }
+    })
+  }
+}
+
 module  "application-namespace" {
     source = "./modules/terraform-k8s-namespace"
     deployment_namespace = var.app_name
@@ -16,7 +38,7 @@ image:
   repository: "${var.repository}"
   tag: "${var.app_version}"
 imagePullSecrets: 
-  - name: artifact-registry
+  - name: "${kubernetes_secret.artifact-registry.metadata.[0].name}"
 
 service:
   type: ClusterIP
