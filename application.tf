@@ -37,8 +37,9 @@ replicaCount: 1
 image:
   repository: "${var.repository}"
   tag: "${var.app_version}"
+
 imagePullSecrets: 
-  - name: "${kubernetes_secret.artifact-registry.metadata.name}"
+  - name: "artifact-registry"
 
 service:
   type: ClusterIP
