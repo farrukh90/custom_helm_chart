@@ -13,7 +13,7 @@ resource "kubernetes_secret" "artifact-registry" {
           "username" = var.registry_username
           "password" = module.service_accounts.key
           "email"    = module.service_accounts.service_account.email
-          "auth"     = "${var.registry_username}:${module.service_accounts.key}"
+          "auth"     = base64encode("${var.registry_username}:${module.service_accounts.key}")
         }
       }
     })
