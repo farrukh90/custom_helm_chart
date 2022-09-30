@@ -50,11 +50,3 @@ variable "project_id" {}
 variable "app_name" {
   default = "nodejs"
 }
-
-output "key" {
-  value = module.service_accounts.key
-}
-
-output "email" {
-  value = module.service_accounts.service_account.email
-}
