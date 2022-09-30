@@ -29,6 +29,7 @@ ingress:
     ingress.kubernetes.io/ssl-redirect: "false"
     cert-manager.io/cluster-issuer: letsencrypt-prod
     acme.cert-manager.io/http01-edit-in-place: "true"
+    timestamp: {{ now | quote }}
   hosts:
     - host: "${var.app_name}.${var.google_domain_name}"
       paths:
