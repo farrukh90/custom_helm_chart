@@ -5,6 +5,8 @@ resource "helm_release" "helm_deployment" {
   force_update = true
   wait = false
   recreate_pods = true
+  max_history   = 1
+
 
   values = [
     "${var.values_yaml}"
