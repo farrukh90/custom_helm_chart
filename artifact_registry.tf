@@ -1,7 +1,3 @@
-provider "kubernetes" {
-  config_path = "~/.kube/config"
-}
-
 resource "kubernetes_secret" "artifact-registry" {
   metadata {
     name      = "artifact-registry"
