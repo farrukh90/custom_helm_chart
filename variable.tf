@@ -15,10 +15,3 @@ variable app_name {
 variable "app_port" {
   default = ""
 }
-
-
-variable "region" {}
-variable "registry_username" {
-  default = "_json_key"
-}
-variable "service_account" {}
