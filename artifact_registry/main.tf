@@ -38,17 +38,13 @@ module "service_accounts" {
     "${var.project_id}=>roles/owner",
   ]
 }
-variable "region" {
-  default = "us-central1"
-}
+variable "region" {}
 variable "registry_username" {
   default = "_json_key"
 }
 
 
-variable "project_id" {
-  default = "csubrsnzorjkvdca"
-}
+variable "project_id" {}
 
 
 variable "app_name" {
